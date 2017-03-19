@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalog - {{ category.name }} - Add New Item{% endblock %}
+
+{% block header %}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6'>
+            Add New Item to {{ category.name }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    	<form action="{{ url_for('add_item', category_id=category.id) }}" method='post'>
+
+        	<p>Name:</p>
+            <input type='text' size='30' name='name' placeholder='Name of item'>
+            <p>Description:</p>
+            <input type='text' size='70' name='description' placeholder='Description of item'>
+
+            <input type='submit' value='Save'>
+
+        </form>
+    </div>
+{% endblock %}

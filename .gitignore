@@ -1,0 +1,7 @@
+*.un~
+*.swp
+__pycache__/
+*.pyc
+client_secrets.json
+*.db
+db/*.db

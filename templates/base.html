@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>{% block title %}Placeholder title{% endblock %}</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap-theme.min.css')}}">
+</head>
+<body>
+	
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    
+    <div class = 'alert alert-info'>
+    	<ul>
+            {% for message in messages %}
+            <li>
+            	<strong> {{ message }} </strong>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class = 'pane'>
+        <div class = 'header'>
+        <h1>{% block header %}Placeholder for header{% endblock %}</h1>
+    </div>
+
+    {% block content %}Placeholder content{% endblock %}
+    <!-- jQuery needed for bootstrap javascript -->
+    <script src="{{url_for('static', filename='jquery-1.11.3.js')}}"></script>
+    <!-- Latest compiled and minified (bootstrap?)JavaScript -->
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+</body>
+</html>

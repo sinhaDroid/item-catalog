@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalog - {{ category.name }}{% endblock %}
+ 
+{% block header %}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-6'>
+            {{ category.name }}
+        </div>
+        <div class='col-md-6'>
+            <a href="{{ url_for('add_item', category_id=category.id) }}"><h4>Add New Item</h4></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if not items %}
+    <h4>There are no items in the database.</h4>
+{% else %}
+    <div class="container">
+    <ul class="items">
+    {% for item in items %}
+        <li class="item"><a href="{{ url_for('show_item', category_id=category.id, item_id=item.id) }}">{{ item.name }}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+{% endblock %}
