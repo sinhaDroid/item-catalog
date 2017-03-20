@@ -2,23 +2,26 @@
 
 {% block title %}Catalog - {{ category.name }} - {{ item.name }}{% endblock %}
 
-{% block header %}
-<div class='container'>
-    <div class='row'>
-        <div class='col-md-6'>
-            {{ category.name }} - {{ item.name }}
-        </div>
-    </div>
-</div>
-{% endblock %}
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="item">
-            <p class="item_name">{{ item.name }}</p>
-            <p class="item_description">{{ item.description }}</p>
-            <a class="item_edit" href="{{ url_for('edit_item', category_id=category.id, item_id=item.id) }}">Edit</a>
-            <a class="item_delete" href="{{ url_for('delete_item', category_id=category.id, item_id=item.id) }}">Delete</a>
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-4'>
+            <h1>{{ item.name }}</h1>
+            <div id="item">
+                <p id="item_description">{{ item.description }}</p>
+            </div>
+        </div>
+
+        <div class='col-md-2'>
+        </div>
+
+        <div class='col-md-4'>
+          {% if is_logged_in_owner %}
+            <a href="{{ url_for('edit_item',   category_id=category.id, item_id=item.id) }}"><button type="Link" class="btn btn-primary">Edit</button></a>
+            <a href="{{ url_for('delete_item', category_id=category.id, item_id=item.id) }}"><button type="Link" class="btn btn-primary">Delete</button></a>
+          {% endif %}
         </div>
     </div>
 {% endblock %}

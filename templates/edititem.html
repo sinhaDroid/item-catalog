@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalog - {{ category.name }} - {{ item.name }} - Edit{% endblock %}
+
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class='row'>
+        <div class='col-md-4'>
+            <h1>{{ item.name }}</h1>
+            <form action="{{ url_for('edit_item', category_id=category.id,
+                                     item_id=item.id) }}" method='post'>
+
+                <p>Item Name:</p>
+                <input type='text' size='30' name='name' value='{{item.name}}'>
+                <p>Item Description:</p>
+                <input type='text' size='70' name='description' value='{{item.description}}'>
+
+                <p> </p>
+                <input type='button' name='cancel' value='Cancel' onclick="window.location='{{ cancel_url }}'">
+                <input type='submit' value='Save'>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

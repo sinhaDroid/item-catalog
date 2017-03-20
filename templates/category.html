@@ -2,29 +2,36 @@
 
 {% block title %}Catalog - {{ category.name }}{% endblock %}
  
-{% block header %}
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
+
+{% block content %}
 <div class='container'>
     <div class='row'>
-        <div class='col-md-6'>
-            {{ category.name }}
+        <div class='col-md-4'>
+            <h1>{{ category.name }}</h1>
+            {% if not items %}
+                <h4>There are no items in the <em>{{ category.name }}</em> category.</h4>
+            {% else %}
+                <div id="items" class="list-group">
+                {% for item in items %}
+                    <a href="{{ url_for('show_item', category_id=category.id, item_id=item.id) }}" class="item list-group-item">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        <div class='col-md-6'>
-            <a href="{{ url_for('add_item', category_id=category.id) }}"><h4>Add New Item</h4></a>
+
+        <div class='col-md-2'>
+        </div>
+
+        <div class='col-md-4'>
+            {% if is_logged_in %}
+                <a href="{{ url_for('add_item', category_id=category.id) }}">
+                    <button type="Link" class="btn btn-primary">Add New Item</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block content %}
-{% if not items %}
-    <h4>There are no items in the database.</h4>
-{% else %}
-    <div class="container">
-    <ul class="items">
-    {% for item in items %}
-        <li class="item"><a href="{{ url_for('show_item', category_id=category.id, item_id=item.id) }}">{{ item.name }}</a></li>
-    {% endfor %}
-    </ul>
-    </div>
-{% endif %}
 {% endblock %}

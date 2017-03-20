@@ -10,21 +10,14 @@
 
 {% block title %}Catalog - {{ category.name }} - {{ item.name }} - Delete{% endblock %}
 
-{% block header %}
-<div class='container'>
-    <div class='row'>
-        <div class='col-md-6'>
-            Do you really want to delete {{ item.name }} in {{ category.name }} ?
-        </div>
-    </div>
-</div>
-{% endblock %}
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        {% set cancel_url_link = url_for('show_item', category_id=category.id, item_id=item.id) %}
-        {% set confirm_url_link = url_for('delete_item', category_id=category.id, item_id=item.id) %}
+        {% set message = "Do you really want to delete this item -- " + item.name + " ?" %}
+        {% set cancel_url = url_for('show_item', category_id=category.id, item_id=item.id) %}
+        {% set confirm_url = url_for('delete_item', category_id=category.id, item_id=item.id) %}
 
-        {{ confirmation_dialog(message="Do you really want to delete this item?", cancel_text="No, Cancel", cancel_url_link=cancel_url_link, confirm_text="Yes, Delete", confirm_url_link=confirm_url_link) }}
+        {{ confirmation_dialog(message=message, cancel_text="No, Cancel", cancel_url=cancel_url, confirm_text="Yes, Delete", confirm_url=confirm_url) }}
 	</div>
 {% endblock %}
