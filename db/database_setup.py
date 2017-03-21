@@ -10,12 +10,13 @@ from config import default_sql_url
 
 Base = declarative_base()
 
-######## end of beginning configuration #####
+# end of beginning configuration #####
+
 
 class User(Base):
     __tablename__ = 'user'
 
-    id = Column(String(80), primary_key = True)
+    id = Column(String(80), primary_key=True)
     name = Column(String(80))
 
     @property
@@ -25,11 +26,12 @@ class User(Base):
             'name': self.name
         }
 
+
 class Category(Base):
     __tablename__ = 'category'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), nullable = False)
+    name = Column(String(80), nullable=False)
 
     @property
     def serialize(self):
@@ -38,11 +40,12 @@ class Category(Base):
             'name': self.name
         }
 
+
 class Item(Base):
     __tablename__ = 'item'
 
-    name = Column(String(80), nullable = False)
-    id = Column(Integer, primary_key = True)
+    name = Column(String(80), nullable=False)
+    id = Column(Integer, primary_key=True)
 
     description = Column(String(250))
 
@@ -59,14 +62,15 @@ class Item(Base):
     def serialize(self):
         # Returns object data in easily serializeable format
         return {
-            'name' : self.name,
-            'description' : self.description,
-            'id' : self.id,
-            'category_id':  self.category_id,
-            'user_id':  self.user_id
+            'name': self.name,
+            'description': self.description,
+            'id': self.id,
+            'category_id': self.category_id,
+            'user_id': self.user_id
         }
 
-######### insert at end of file #########3
+# insert at end of file #########3
+
 
 def create_database(sqlite_database_name):
     Base.metadata.create_all(create_engine(sqlite_database_name))

@@ -39,10 +39,9 @@
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='bootstrap-theme.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-theme.min.css')}}">
 </head>
 <body>
-	
 	{% with messages = get_flashed_messages() %}
         {% if messages %}
         
