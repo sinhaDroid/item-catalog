@@ -4,7 +4,7 @@ import json
 import requests
 
 def upgrade_to_credentials(authorization_code):
-    oauth_flow = flow_from_clientsecrets('client_secret.json', scope='')
+    oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
     oauth_flow.redirect_uri = 'postmessage'
     credentials = oauth_flow.step2_exchange(authorization_code)
     return credentials
@@ -21,8 +21,7 @@ def is_already_logged_in(login_session):
     return stored_credentials is not None and stored_gplus_id is not None
 
 def is_logged_in_as_owner(login_session, item_user_id):
-    return  (is_already_logged_in(login_session) and
-             (item_user_id == login_session.get('id', None)))
+    return  (is_already_logged_in(login_session) and (item_user_id == login_session.get('id', None)))
 
 def get_user_info(access_token):
     userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
@@ -31,7 +30,7 @@ def get_user_info(access_token):
     return answer.json()
 
 def update_login_session(login_session, credentials, gplus_id, user_info):
-    login_session['credentials'] = credentials
+    login_session['credentials'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
     login_session['username'] = user_info['name']
     login_session['picture'] = user_info['picture']

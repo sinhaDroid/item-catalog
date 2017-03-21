@@ -16,7 +16,7 @@ from db.database_access import db_delete_item, db_latest_items, db_update_user
 from util import item_from_request_post, json_response
 from login import (upgrade_to_credentials, token_info, is_already_logged_in, is_logged_in_as_owner, get_user_info, update_login_session)
 
-CLIENT_ID = json.loads(open('client_secret.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 session = db_create_session()
 
 ########## Routes for home page
@@ -225,6 +225,6 @@ def showLogin():
 
 
 if __name__ == '__main__':
-    app.secret_key = '3ThDiYx9HMwZVoadMSs_vvO3'
+    app.secret_key = 'super_secret_key'
     app.debug = True
     app.run(host = '0.0.0.0', port = 5000, debug=True)
