@@ -1,0 +1,23 @@
+{% macro confirmation_dialog(message, cancel_text, cancel_url_link,
+                             confirm_text, confirm_url_link) %}
+        <p><a href="{{ cancel_url_link }}">{{ cancel_text }}</a></p>
+        <form action="{{ confirm_url_link }}" method='post'>
+            <input type='submit' value='{{ confirm_text }}'>
+        </form>
+{% endmacro %}
+
+{% extends 'base.html' %}
+
+{% block title %}Catalog - {{ category.name }} - {{ item.name }} - Delete{% endblock %}
+
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% set message = "Do you really want to delete this item -- " + item.name + " ?" %}
+        {% set cancel_url = url_for('show_item', category_id=category.id, item_id=item.id) %}
+        {% set confirm_url = url_for('delete_item', category_id=category.id, item_id=item.id) %}
+
+        {{ confirmation_dialog(message=message, cancel_text="No, Cancel", cancel_url=cancel_url, confirm_text="Yes, Delete", confirm_url=confirm_url) }}
+	</div>
+{% endblock %}

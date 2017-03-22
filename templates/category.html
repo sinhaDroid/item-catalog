@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Catalog - {{ category.name }}{% endblock %}
+ 
+{% block header %}{{ header_bar(is_logged_in) }}{% endblock %}
+
+{% block content %}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-4'>
+            <h1>{{ category.name }}</h1>
+            {% if not items %}
+                <h4>There are no items in the <em>{{ category.name }}</em> category.</h4>
+            {% else %}
+                <div id="items" class="list-group">
+                {% for item in items %}
+                    <a href="{{ url_for('show_item', category_id=category.id, item_id=item.id) }}" class="item list-group-item">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class='col-md-2'>
+        </div>
+
+        <div class='col-md-4'>
+            {% if is_logged_in %}
+                <a href="{{ url_for('add_item', category_id=category.id) }}">
+                    <button type="Link" class="btn btn-primary">Add New Item</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
