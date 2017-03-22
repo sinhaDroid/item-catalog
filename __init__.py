@@ -21,7 +21,8 @@ from login import (is_logged_in_as_owner, get_user_info, update_login_session)
 
 app = Flask(__name__)
 
-CLIENT_ID = '168358176636-h2kjg2ndmu4u8ia6u2ab52cjhrr3e8aa.apps.googleusercontent.com'
+CLIENT_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
 session = db_create_session()
 
 

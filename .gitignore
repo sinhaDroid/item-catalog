@@ -1,0 +1,7 @@
+*.un~
+*.swp
+__pycache__/
+*.pyc
+*.db
+db/*.db
+lib
