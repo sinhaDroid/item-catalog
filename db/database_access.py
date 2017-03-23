@@ -28,11 +28,13 @@ def db_add_item_using_category_name(session, category_name,
 
 
 def db_categories(db_session):
-    return db_session.query(Category).order_by(Category.name).all()
+    categories = db_session.query(Category).order_by(Category.name).all()
+    return categories
 
 
 def db_category(db_session, category_id):
-    return db_session.query(Category).filter_by(id=category_id).one()
+    category = db_session.query(Category).filter_by(id=category_id).one()
+    return category
 
 
 def db_items_in_category(db_session, category_id):
@@ -42,7 +44,8 @@ def db_items_in_category(db_session, category_id):
 
 
 def db_item(db_session, item_id):
-    return db_session.query(Item).filter_by(id=item_id).one()
+    item = db_session.query(Item).filter_by(id=item_id).one()
+    return item
 
 
 def db_latest_items(db_session, number_of_items=latest_items):

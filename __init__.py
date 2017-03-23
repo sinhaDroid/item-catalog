@@ -2,6 +2,7 @@ import random
 import string
 import httplib2
 import json
+import pdb
 
 from flask import (Flask, render_template, request)
 from flask import (redirect, make_response, url_for, flash, jsonify)
@@ -22,7 +23,7 @@ from login import (is_logged_in_as_owner, get_user_info, update_login_session)
 app = Flask(__name__)
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/home/deepanshu/git/udacity/item-catalog/client_secrets.json', 'r').read())['web']['client_id']
 session = db_create_session()
 
 
@@ -137,7 +138,9 @@ def edit_item(category_id, item_id):
     else:
         category = db_category(session, category_id)
         item = db_item(session, item_id)
-        if is_logged_in_as_owner(login_session, item):
+        print 'item.user_id'
+        print item.user_id
+        if is_logged_in_as_owner(login_session, item.user_id):
             url = '/catalog/category/' + str(item.category_id)
             cancel_url = url + '/item/' + str(item_id)
             log_in = is_already_logged_in(login_session)
@@ -231,7 +234,7 @@ def gdisconnect():
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    access_token = credentials.access_token
+    access_token = credentials
     url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
@@ -270,6 +273,11 @@ def showLogin():
     login_session['state'] = state
     print 'state = ' + state
     return render_template('login.html', STATE=state)
+
+
+@app.route('/logout')
+def logout():
+    return gdisconnect()
 
 
 if __name__ == '__main__':
