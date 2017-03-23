@@ -2,7 +2,6 @@ import random
 import string
 import httplib2
 import json
-import pdb
 
 from flask import (Flask, render_template, request)
 from flask import (redirect, make_response, url_for, flash, jsonify)
@@ -138,8 +137,6 @@ def edit_item(category_id, item_id):
     else:
         category = db_category(session, category_id)
         item = db_item(session, item_id)
-        print 'item.user_id'
-        print item.user_id
         if is_logged_in_as_owner(login_session, item.user_id):
             url = '/catalog/category/' + str(item.category_id)
             cancel_url = url + '/item/' + str(item_id)
@@ -271,7 +268,6 @@ def showLogin():
         random.choice(
             string.ascii_uppercase + string.digits) for x in xrange(32))
     login_session['state'] = state
-    print 'state = ' + state
     return render_template('login.html', STATE=state)
 
 
@@ -283,4 +279,4 @@ def logout():
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run()

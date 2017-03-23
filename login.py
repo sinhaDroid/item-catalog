@@ -2,8 +2,6 @@ from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import json
 import requests
-import pdb
-
 
 def upgrade_to_credentials(authorization_code):
     oauth_flow = flow_from_clientsecrets('/home/deepanshu/git/udacity/item-catalog/client_secrets.json', scope='')
