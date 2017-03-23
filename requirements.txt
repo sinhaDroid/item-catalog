@@ -1,0 +1,7 @@
+flask
+sqlalchemy
+requests
+oauth2client
+flask-seasurf
+httplib2
+psycopg2
