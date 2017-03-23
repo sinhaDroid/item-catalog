@@ -22,7 +22,7 @@ from login import (is_logged_in_as_owner, get_user_info, update_login_session)
 app = Flask(__name__)
 
 CLIENT_ID = json.loads(
-    open('/home/deepanshu/git/udacity/item-catalog/client_secrets.json', 'r').read())['web']['client_id']
+    open('client_secrets.json', 'r').read())['web']['client_id']
 session = db_create_session()
 
 
@@ -160,6 +160,8 @@ def edit_item(category_id, item_id):
 def delete_item(category_id, item_id):
     if request.method == 'POST':
         item = db_item(session, item_id)
+        print item
+        print item.user_id
         if item and is_logged_in_as_owner(login_session, item.user_id):
             db_delete_item(session, item)
             return redirect(url_for('show_items_in_category',
@@ -171,7 +173,7 @@ def delete_item(category_id, item_id):
     else:
         category = db_category(session, category_id)
         item = db_item(session, item_id)
-        if is_logged_in_as_owner(login_session, item):
+        if is_logged_in_as_owner(login_session, item.user_id):
             log_in = is_already_logged_in(login_session)
             return render_template('deleteitem.html', category=category,
                                    item=item, is_logged_in=log_in)
