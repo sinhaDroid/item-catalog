@@ -23,9 +23,6 @@ Change directory to item-catalog.
 You need to supply a client_secret.json file. You can create an application to use
 Google's OAuth service at https://console.developers.google.com. 
 
-Instructions are available at Udacity's Authentication & Authorization: OAuth -- Implementing Web Security with OAuth 2.0.
-You can find the course at https://www.udacity.com/course/authentication-authorization-oauth--ud330
-
 After creating and downloading your client_secret.json file, move it to the 
 item-catalog directory so it is accessible to the Item Catalog application.
 
@@ -43,7 +40,7 @@ python db/database_load.py
 # Starting Application
 To start the application enter:
 ```
-python project.py
+python __init__.py
 ```
 
 Then bring up a browser and point it to localhost:5000.
