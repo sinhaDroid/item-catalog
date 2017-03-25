@@ -8,10 +8,11 @@ BASE_DIR = os.path.abspath(pathname)
 default_sqlite_url = 'sqlite:///' + os.path.join(BASE_DIR, 'catalog.db')
 
 # add support for Postgresql database
-# sqlalchemy_database_uri = "postgresql://" +
-# "catalog:catalog_super_secret@localhost/catalog"
+sqlalchemy_database_uri = 'postgresql://postgres:postgres@localhost/catalog'
 
-default_sql_url = default_sqlite_url
+default_sql_url = sqlalchemy_database_uri
+
+# default_sql_url = default_sqlite_url
 
 items = [
     'Soccer', 'Basketball', 'Baseball', 'Frisbee',
